@@ -1,10 +1,10 @@
 <?php
 
-namespace Chrisbjr\ApiGuard\Http\Middleware;
+namespace Kiriunin\ApiGuard\Http\Middleware;
 
 use Carbon\Carbon;
-use Chrisbjr\ApiGuard\Events\ApiKeyAuthenticated;
-use Chrisbjr\ApiGuard\Models\Device;
+use Kiriunin\ApiGuard\Events\ApiKeyAuthenticated;
+use Kiriunin\ApiGuard\Models\Device;
 use Closure;
 
 class AuthenticateApiKey

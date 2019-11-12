@@ -1,5 +1,5 @@
 {
-    "name": "chrisbjr/api-guard",
+    "name": "kiriunin/api-guard",
     "description": "A simple way of authenticating your APIs with API keys using Laravel",
     "keywords": [
         "api",
@@ -18,20 +18,31 @@
         {
             "name": "Mark Jayson Fuentes",
             "email": "awkwardusername@gmail.com"
+        },
+        {
+            "name": "Evgeniy Kiriunin",
+            "email": "e@kiriunin.ru"
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/support": "^5.3.0",
-        "illuminate/database": "^5.3.0",
+        "php": ">=7.2",
+        "illuminate/support": "^5.5|^6.0",
+        "illuminate/database": "^5.5|^6.0",
         "ellipsesynergie/api-response": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.0 || ^5.0"
+        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
     },
     "autoload": {
         "psr-4": {
-            "Chrisbjr\\ApiGuard\\": "src"
+            "Kiriunin\\ApiGuard\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kiriunin\\ApiGuard\\Providers\\ApiGuardServiceProvider"
+            ]
         }
     },
     "minimum-stability": "stable"
