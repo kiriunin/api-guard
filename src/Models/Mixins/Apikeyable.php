@@ -11,6 +11,11 @@ trait Apikeyable
         return $this->morphMany(config('apiguard.models.api_key', ApiKey::class), 'apikeyable');
     }
 
+    public function apiKeyOwner()
+    {
+        return $this->morphOne(config('apiguard.models.api_key', ApiKey::class), 'apiKeyOwner');
+    }
+
     public function createApiKey()
     {
         return ApiKey::make($this);

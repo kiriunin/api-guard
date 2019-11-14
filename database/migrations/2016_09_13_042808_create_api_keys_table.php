@@ -18,6 +18,7 @@ class CreateApiKeysTable extends Migration
             $table->nullableMorphs('apikeyable');
             $table->string('comment')->nullable();
             $table->string('key', 50);
+            $table->nullableMorphs('owner');
             $table->string('last_ip_address', 50)->nullable();
             $table->dateTime('last_used_at')->nullable();
             $table->nullableTimestamps();

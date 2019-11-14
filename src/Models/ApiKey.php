@@ -18,6 +18,8 @@ class ApiKey extends Model
         'apikeyable_type',
         'last_ip_address',
         'last_used_at',
+        'owner_id',
+        'owner_type',
     ];
 
     /**
@@ -29,11 +31,20 @@ class ApiKey extends Model
     }
 
     /**
-     * @param $apikeyable
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function apiKeyOwner()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * @param Model $apikeyable
+     * @param Model|null $owner
      * @param string|null $comment
      * @return ApiKey
      */
-    public static function make($apikeyable, string $comment = null)
+    public static function make(Model $apikeyable, Model $owner = null, string $comment = null)
     {
         $apiKey = new ApiKey([
             'key'             => self::generateKey(),
@@ -41,7 +52,9 @@ class ApiKey extends Model
             'apikeyable_type' => get_class($apikeyable),
             'last_ip_address' => Request::ip(),
             'last_used_at'    => Carbon::now(),
-            'comment'         => $comment
+            'comment'         => $comment,
+            'owner_id'   => $owner->id,
+            'owner_type' => get_class($owner),
         ]);
 
         $apiKey->save();
