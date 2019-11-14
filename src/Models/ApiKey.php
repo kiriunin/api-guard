@@ -13,6 +13,7 @@ class ApiKey extends Model
 
     protected $fillable = [
         'key',
+        'comment',
         'apikeyable_id',
         'apikeyable_type',
         'last_ip_address',
@@ -29,10 +30,10 @@ class ApiKey extends Model
 
     /**
      * @param $apikeyable
-     *
+     * @param string|null $comment
      * @return ApiKey
      */
-    public static function make($apikeyable)
+    public static function make($apikeyable, string $comment = null)
     {
         $apiKey = new ApiKey([
             'key'             => self::generateKey(),
@@ -40,6 +41,7 @@ class ApiKey extends Model
             'apikeyable_type' => get_class($apikeyable),
             'last_ip_address' => Request::ip(),
             'last_used_at'    => Carbon::now(),
+            'comment'         => $comment
         ]);
 
         $apiKey->save();

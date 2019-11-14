@@ -4,7 +4,6 @@ namespace Kiriunin\ApiGuard\Http\Middleware;
 
 use Carbon\Carbon;
 use Kiriunin\ApiGuard\Events\ApiKeyAuthenticated;
-use Kiriunin\ApiGuard\Models\Device;
 use Closure;
 
 class AuthenticateApiKey
@@ -21,7 +20,7 @@ class AuthenticateApiKey
     {
         $apiKeyValue = $request->header(config('apiguard.header_key', 'X-Authorization'));
 
-        $apiKey = app(config('apiguard.models.api_key', 'Chrisbjr\ApiGuard\Models\ApiKey'))->where('key', $apiKeyValue)
+        $apiKey = app(config('apiguard.models.api_key', 'Kiriunin\ApiGuard\Models\ApiKey'))->where('key', $apiKeyValue)
             ->first();
 
         if (empty($apiKey)) {
