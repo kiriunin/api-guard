@@ -47,14 +47,14 @@ class ApiKey extends Model
     public static function make(Model $apikeyable, Model $owner = null, string $comment = null)
     {
         $apiKey = new ApiKey([
-            'key'             => self::generateKey(),
-            'apikeyable_id'   => $apikeyable->id,
+            'key' => self::generateKey(),
+            'apikeyable_id' => $apikeyable->id,
             'apikeyable_type' => get_class($apikeyable),
             'last_ip_address' => Request::ip(),
-            'last_used_at'    => Carbon::now(),
-            'comment'         => $comment,
-            'owner_id'   => $owner->id,
-            'owner_type' => get_class($owner),
+            'last_used_at' => Carbon::now(),
+            'comment' => $comment,
+            'owner_id' => is_object($owner) ? $owner->id : null,
+            'owner_type' => is_object($owner) ? get_class($owner): null,
         ]);
 
         $apiKey->save();
