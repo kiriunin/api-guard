@@ -3,6 +3,7 @@
 namespace Kiriunin\ApiGuard\Http\Middleware;
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Kiriunin\ApiGuard\Events\ApiKeyAuthenticated;
 use Closure;
 
@@ -16,7 +17,7 @@ class AuthenticateApiKey
      * @param  string|null $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
         $apiKeyValue = $request->header(config('apiguard.header_key', 'X-Authorization'));
 
@@ -43,7 +44,7 @@ class AuthenticateApiKey
         });
 
         // Attach the apikey object to the request
-        $request->apiKey = $apiKey;
+        $request->request->add(['apiKey' => $apiKey]);
 
         event(new ApiKeyAuthenticated($request, $apiKey));
 
